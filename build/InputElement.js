@@ -392,6 +392,11 @@ var InputElement = React.createClass({
         var preventDefault = false;
         switch (key) {
             case "Backspace":
+                var editablePos = this.getLeftEditablePos(caretPos - 1)
+                  if (editablePos !== null) {
+                    value = this.clearRange(value, editablePos, 1);
+                    caretPos = editablePos;
+                  }
             case "Delete":
                 var prefixLen = this.getPrefix().length;
                 var deleteFromRight = key === "Delete";
